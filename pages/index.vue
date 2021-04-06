@@ -10,12 +10,17 @@
 
 <script>
 import axios from "axios";
-let url = "https://jsonplaceholder.typicode.com/users";
+let url = "https://jsonplaceholder.typicode.com/usersxxx";
 export default {
-  asyncData() {
-    return axios.get(url).then((response) => {
-      return { users: response.data };
-    });
+  asyncData(params, error) {
+    return axios
+      .get(url)
+      .then((response) => {
+        return { users: response.data };
+      })
+      .catch((e) => {
+        error({ users: e.response.status, message: e.message });
+      });
   },
 };
 </script>
